@@ -1,0 +1,7 @@
+# vars/main.yml
+
+# Variables for container-related tasks
+container_count: 2
+
+# Variables for website-related tasks
+website_deploy_folder: /tmp/mywebsite

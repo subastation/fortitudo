@@ -1,0 +1,13 @@
+# defaults/main.yml
+
+# Default values for container-related variables
+container_name_prefix: flow-
+container_image: httpd:latest
+docroot_folder: /data/user/www
+http_port: 80
+https_port: 443
+logging_folder: /var/log/httpd
+
+# Default values for website-related variables
+website_repo_url: https://github.com/subastation/subastation.github.io
+website_root: /var/www/mywebsite

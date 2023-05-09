@@ -1,0 +1,14 @@
+# tasks/deploy_website.yml
+
+- name: Clone website repository
+  git:
+    repo: "{{ website_repo_url }}"
+    dest: "{{ website_deploy_folder }}"
+  register: git_clone_result
+
+- name: Deploy website
+  community.general.archive:
+    src: "{{ website_deploy_folder }}"
+    dest: "{{ website_root }}"
+    format: zip
+  when: git_clone_result.changed

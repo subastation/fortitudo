@@ -1,0 +1,20 @@
+# tasks/container.yml
+
+- name: Install container tools module
+  dnf:
+    name: container-tools
+    state: present
+
+- name: Create httpd containers
+  community.general.podman_container:
+    name: "{{ container_name_prefix }}{{ item }}"
+    image: "{{ container_image }}"
+    command: httpd -DFOREGROUND
+    ports:
+      - "{{ http_port }}:80"
+      - "{{ https_port }}:443"
+    volumes:
+      - "{{ docroot_folder }}:/usr/local/apache2/htdocs"
+      - "{{ logging_folder }}/{{ container_name_prefix }}{{ item }}:/var/log/httpd"
+    state: started
+  loop: "{{ range(1, container_count + 1)|list }}"
